@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KBCOWN Survey – Get Paid for Simple Surveys</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-start: #050b1f;
+    --bg-mid:   #0d1a3a;
+    --bg-end:   #1a0a3d;
+    --accent:   #7c3aed;
+    --accent2:  #4f46e5;
+    --gold:     #f5c542;
+    --green:    #22d3a5;
+    --text:     #e8eaf6;
+    --muted:    #8b9acb;
+    --card-bg:  rgba(255,255,255,0.04);
+    --card-border: rgba(124,58,237,0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(145deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+    min-height: 100vh;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── Noise + mesh overlay ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 90% 80%,  rgba(79,70,229,0.18)  0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 10% 70%,  rgba(34,211,165,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Animated blobs ── */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .blob-1 { width: 420px; height: 420px; background: #7c3aed; top: -120px; left: -80px; animation-duration: 14s; }
+  .blob-2 { width: 320px; height: 320px; background: #4f46e5; bottom: -80px; right: -60px; animation-duration: 10s; animation-delay: -4s; }
+  .blob-3 { width: 200px; height: 200px; background: #22d3a5; top: 50%; left: 60%; animation-duration: 9s; animation-delay: -7s; }
+
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.08); }
+  }
+
+  /* ── Layout ── */
+  .page { position: relative; z-index: 1; }
+
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 64px 0 48px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.5);
+    color: #c4b5fd;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .hero-emoji {
+    font-size: 60px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 18px;
+    animation: pop 0.6s cubic-bezier(.34,1.56,.64,1) 0.2s both;
+    filter: drop-shadow(0 0 22px rgba(245,197,66,0.5));
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(30px, 8vw, 44px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 16px;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  h1 span {
+    background: linear-gradient(90deg, #f5c542 0%, #fb923c 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subheadline {
+    font-size: 18px;
+    color: #a5b4fc;
+    font-weight: 500;
+    margin-bottom: 36px;
+    animation: fadeUp 0.7s ease 0.45s both;
+  }
+
+  /* ── Perks ── */
+  .perks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.7s ease 0.55s both;
+  }
+
+  .perk {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 14px 18px;
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .perk:hover { transform: translateX(4px); border-color: rgba(124,58,237,0.5); }
+
+  .perk-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #22d3a5, #4f46e5);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+    box-shadow: 0 0 14px rgba(34,211,165,0.35);
+  }
+
+  .perk-text { font-size: 15px; font-weight: 500; color: #d1d5db; }
+
+  /* ── Device section ── */
+  .device-section {
+    margin-bottom: 44px;
+    animation: fadeUp 0.7s ease 0.65s both;
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 28px;
+    border-radius: 18px;
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .cta-btn:hover { transform: translateY(-3px) scale(1.02); }
+  .cta-btn:hover::before { opacity: 1; }
+  .cta-btn:active { transform: scale(0.97); }
+
+  .cta-android {
+    background: linear-gradient(135deg, #22d3a5 0%, #059669 100%);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(34,211,165,0.4), 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .cta-android:hover { box-shadow: 0 12px 40px rgba(34,211,165,0.55), 0 2px 8px rgba(0,0,0,0.3); }
+
+  .cta-iphone {
+    background: linear-gradient(135deg, #818cf8 0%, #7c3aed 50%, #5b21b6 100%);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(124,58,237,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .cta-iphone:hover { box-shadow: 0 12px 40px rgba(124,58,237,0.65), 0 2px 8px rgba(0,0,0,0.3); }
+
+  .btn-icon { font-size: 22px; flex-shrink: 0; }
+
+  .btn-content { display: flex; flex-direction: column; align-items: flex-start; }
+  .btn-label { font-size: 13px; font-weight: 500; opacity: 0.82; font-family: 'DM Sans', sans-serif; letter-spacing: 0; }
+  .btn-title { font-size: 17px; font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  .btn-arrow {
+    margin-left: auto;
+    font-size: 20px;
+    opacity: 0.7;
+    transition: transform 0.2s;
+  }
+  .cta-btn:hover .btn-arrow { transform: translateX(4px); opacity: 1; }
+
+  /* ── Pulse ring on buttons ── */
+  .cta-android::after, .cta-iphone::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 22px;
+    border: 2px solid currentColor;
+    opacity: 0;
+    animation: pulse-ring 3s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0%   { inset: -2px; opacity: 0.6; }
+    100% { inset: -14px; opacity: 0; }
+  }
+
+  /* ── Trust bar ── */
+  .trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.7s ease 0.75s both;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .trust-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .trust-icon { font-size: 15px; }
+
+  /* ── Stats strip ── */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.7s ease 0.8s both;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 18px 12px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #f5c542, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 22px;
+    text-align: center;
+    color: rgba(139,154,203,0.5);
+    font-size: 12px;
+    animation: fadeUp 0.7s ease 0.9s both;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Scrolling marquee ── */
+  .marquee-wrapper {
+    overflow: hidden;
+    margin: 0 -22px 40px;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    animation: fadeUp 0.7s ease 0.6s both;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: marquee 18s linear infinite;
+    padding: 8px 0;
+  }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #c4b5fd;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 999px;
+    padding: 6px 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<div class="page">
+<div class="container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">🇺🇸 US Users Only &nbsp;·&nbsp; Limited Spots</div>
+    <span class="hero-emoji">💰</span>
+    <h1>Get Paid for<br /><span>Simple Surveys</span></h1>
+    <p class="subheadline">Earn money from your phone in minutes</p>
+
+    <!-- Perks -->
+    <div class="perks">
+      <div class="perk">
+        <div class="perk-icon">✅</div>
+        <span class="perk-text">No experience needed — anyone can do it</span>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🆓</div>
+        <span class="perk-text">Free to start, no payment required</span>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">⚡</div>
+        <span class="perk-text">Takes less than 2 minutes to begin</span>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">📱</div>
+        <span class="perk-text">Works on all smartphones</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-value">$500+</span>
+      <span class="stat-label">Avg earned</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">2 min</span>
+      <span class="stat-label">To start</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">100%</span>
+      <span class="stat-label">Free</span>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrapper">
+    <div class="marquee-track">
+      <div class="marquee-item">💸 Instant payouts</div>
+      <div class="marquee-item">🔒 Secure & private</div>
+      <div class="marquee-item">🇺🇸 US residents only</div>
+      <div class="marquee-item">📲 Mobile-friendly</div>
+      <div class="marquee-item">🎯 No spam, ever</div>
+      <div class="marquee-item">⭐ Top-rated surveys</div>
+      <!-- duplicate for seamless loop -->
+      <div class="marquee-item">💸 Instant payouts</div>
+      <div class="marquee-item">🔒 Secure & private</div>
+      <div class="marquee-item">🇺🇸 US residents only</div>
+      <div class="marquee-item">📲 Mobile-friendly</div>
+      <div class="marquee-item">🎯 No spam, ever</div>
+      <div class="marquee-item">⭐ Top-rated surveys</div>
+    </div>
+  </div>
+
+  <!-- Device section -->
+  <div class="device-section">
+    <p class="section-label">Choose your device to get started</p>
+    <div class="cta-buttons">
+
+      <a href="https://singingfiles.com/show.php?l=0&u=2518053&id=73805" class="cta-btn cta-android">
+        <span class="btn-icon">🤖</span>
+        <span class="btn-content">
+          <span class="btn-label">Tap to begin</span>
+          <span class="btn-title">Start on Android 📱</span>
+        </span>
+        <span class="btn-arrow">→</span>
+      </a>
+
+      <a href="https://singingfiles.com/show.php?l=0&u=2518053&id=73210" class="cta-btn cta-iphone">
+        <span class="btn-icon">🍎</span>
+        <span class="btn-content">
+          <span class="btn-label">Tap to begin</span>
+          <span class="btn-title">Start on iPhone 🍎</span>
+        </span>
+        <span class="btn-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="trust-bar">
+    <span class="trust-item"><span class="trust-icon">🔐</span> No payment required</span>
+    <span class="trust-dot"></span>
+    <span class="trust-item"><span class="trust-icon">🇺🇸</span> US users only</span>
+    <span class="trust-dot"></span>
+    <span class="trust-item"><span class="trust-icon">🛡️</span> Safe & secure</span>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 KBCOWN Survey &nbsp;·&nbsp; Available for US residents only &nbsp;·&nbsp; Free to join
+</footer>
+</div>
+</body>
+</html>
